@@ -72,6 +72,9 @@ app.post("/render", upload.single("frames"), async (req, res) => {
     return res.status(500).json({ error: "Rendu échoué", detail: String(err?.message || err) });
   }
 });
+app.get("/", (_req, res) => {
+  res.type("text/plain").send("Alfie FFmpeg backend is running. Use GET /health or POST /render");
+});
 
 app.listen(process.env.PORT || 8787, () => {
   console.log("FFmpeg render server on :" + (process.env.PORT || 8787));
